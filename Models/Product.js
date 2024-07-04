@@ -9,7 +9,7 @@ const ProductSchema =new mongoose.Schema({
     productOwnerName:{type : String , required:true},
     orders:[ {customerId: {type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true}  , customerName: { type: String, required: true }} ],
     sizes: { type: [String], enum: ['S', 'M', 'L', 'XL'], required: true }
-})
+});
 
 const Product = mongoose.model("Product" , ProductSchema );
 module.exports = Product;

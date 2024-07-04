@@ -14,8 +14,8 @@ router.post("/removeFromWishlist/:id" , removeFromWishlist);
 router.get("/fetchProductsForAll",fetchProductsForAll);
 router.get("/fetchProductsBrand/:id" ,fetchProductsBrand);
 router.get("/fetchCart/:userid" , fetchCart);
-router.get("/fetchWishlist" , fetchWishlist);
-router.get("/fetchOrders" , fetchOrders);
+router.get("/fetchWishlist/:userid" , fetchWishlist);
+router.get("/fetchOrders/:userid" , fetchOrders);
 
 
 
