@@ -5,13 +5,13 @@ const connectToMongo = require("./db")
 
 const app = express()
 app.use(cors({
-    origin:  ["https://shop-nest-frontend.vercel.app" , "http://localhost:3000"],
+    origin:  ["https://shop-nest-olive.vercel.app" , "http://localhost:3000"],
     methods: ['POST', 'DELETE', 'GET', 'PUT', 'PATCH'],
     credentials: true
 }));
 
 app.options("" ,cors({
-    origin:  ["https://shop-nest-frontend.vercel.app", "http://localhost:3000" ],
+    origin:  ["https://shop-nest-olive.vercel.app", "http://localhost:3000" ],
     methods: ['POST', 'DELETE', 'GET', 'PUT', 'PATCH'],
     credentials: true
 }) )
