@@ -1,5 +1,14 @@
 const mongoose = require('mongoose');
 
+const ReceivedOrderSchema = new mongoose.Schema({
+    deliveryAddress: { type: String, required: true },
+    deliveryDate: { type: Date, required: true },
+    money: { type: Number, required: true },
+    userName: { type: String, required: true },
+    userNumber: { type: Number, required: true },
+    orderDate: { type: Date, default: Date.now }
+});
+
 const UserSchema = new mongoose.Schema({
     name: { type: String, required: true },
     email: { type: String, required: true, unique: true },
@@ -13,10 +22,15 @@ const UserSchema = new mongoose.Schema({
     }],
     wishlist: [{ type: mongoose.Schema.Types.ObjectId, ref: "Product" }],
     orders: [{
-        productId: { type: mongoose.Schema.Types.ObjectId, ref: "Product" },
-        size: { type: String, required: true }
+        products: [{
+            productId: { type: mongoose.Schema.Types.ObjectId, ref: "Product" },
+            size: { type: String, required: true }
+        }],
+        totalCost: { type: Number, required: true },
+        placedAt: { type: Date, default: Date.now }
     }],
-    rewards: { type: Number, default: 0 }
+    rewards: { type: Number, default: 0 },
+    receivedOrders: [ReceivedOrderSchema] 
 });
 
 const User = mongoose.model("User", UserSchema);

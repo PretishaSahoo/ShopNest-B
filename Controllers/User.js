@@ -23,49 +23,50 @@ exports.createUser = async (req, res) => {
     }
 };
 
-exports.fetchUserById = async (req, res) => {
-    const { id } = req.params;
+
+exports.fetchUserByEmail = async (req, res) => {
+    const { email } = req.body; 
     try {
-        const user = await User.findById(id);
+        const user = await User.findOne({ email });
         if (user) {
-            const role = user.role;
             res.status(200).json({ exists: true, user });
         } else {
             res.status(404).json({ exists: false, message: 'User not found' });
         }
     } catch (error) {
-        console.error('Fetch user by ID error:', error.message);
+        console.error('Fetch user by email error:', error.message);
         res.status(500).json({ error: 'Internal server error' });
     }
 };
 
+
+
 exports.editUser = async (req, res) => {
-    const { id } = req.params;
+    const { email } = req.params;
     const { currPassword, ...changes } = req.body;
+
     try {
-        const user = await User.findById(id);
+        const user = await User.findOne({ email :email});
         if (!user) {
             return res.status(404).json({ message: 'User not found' });
         }
 
-        if(currPassword){
+        if (currPassword) {
             const isMatch = await bcrypt.compare(currPassword, user.password);
-                if (!isMatch) {
-                    return res.status(400).json({ message: 'Current password is incorrect' });
-                }
+            if (!isMatch) {
+                return res.status(400).json({ message: 'Current password is incorrect' });
+            }
 
-                if (changes.password) {
-                    changes.password = await bcrypt.hash(changes.password, 10);
-                }
-                    
+            if (changes.password) {
+                changes.password = await bcrypt.hash(changes.password, 10);
+            }
         }
-        
+
         Object.assign(user, changes);
         await user.save();
 
         res.status(200).json({ user });
     } catch (error) {
-        console.error('Edit user error:', error.message);
         res.status(500).json({ error: 'Internal server error' });
     }
 };

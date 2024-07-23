@@ -1,1 +1,3 @@
 ShopNest-Backend
+
+ Full Stack responsive Ecommerce  Application built on the MERN Stack and Firebase . Features involve Sellers to add and update their products , buyers being able to wishlist the items , add or remove them into their cart and place orders ,recieve orders. Additionally AI  Style Assistant ChatBot is also integrated . Technologies used - React JS , Tailwind CSS , MongoDB , Express JS ,Node JS , Firebase(Authentication and Storage)  
