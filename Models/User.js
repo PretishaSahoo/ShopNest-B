@@ -6,7 +6,11 @@ const ReceivedOrderSchema = new mongoose.Schema({
     money: { type: Number, required: true },
     userName: { type: String, required: true },
     userNumber: { type: Number, required: true },
-    orderDate: { type: Date, default: Date.now }
+    orderDate: { type: Date, default: Date.now },
+    products: [{
+        productId: { type: mongoose.Schema.Types.ObjectId, ref: "Product" },
+        size: { type: String, required: true }
+    }]
 });
 
 const UserSchema = new mongoose.Schema({

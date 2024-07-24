@@ -222,15 +222,15 @@ exports.addOrder = async (req, res) => {
             productOwnerDetails.products.push({
                 productId: product.productId,
                 size: product.size,
-                totalCost: productDetails.price, 
-                datePlaced: new Date() 
+                productName: productDetails.productName,
+                price: productDetails.price
             });
 
             return {
                 productId: product.productId,
                 size: product.size,
-                totalCost: productDetails.price, 
-                datePlaced: new Date() 
+                productName: productDetails.productName,
+                price: productDetails.price
             };
         });
 
@@ -268,6 +268,8 @@ exports.addOrder = async (req, res) => {
         res.status(500).json({ error: "Internal server error" });
     }
 };
+
+
 
 exports.fetchReceivedOrders = async (req, res) => {
     const { userid } = req.params;
