@@ -318,12 +318,15 @@ exports.fetchOrders = async (req, res) => {
     }
 };
 
-
+function shuffleArray(array) {
+    return array.sort(() => Math.random() - 0.5);
+}
 
 
 exports.fetchProductsForAll = async(req, res) => {
     try {
-        const products = await Product.find({});
+        let products = await Product.find({});
+        products = shuffleArray(products)
         res.status(200).json({ products });
     } catch (err) {
         res.status(500).json({ error: "Internal server error" });
@@ -340,4 +343,3 @@ exports.fetchProductsBrand = async(req,res)=>{
     }
 
 }
-
